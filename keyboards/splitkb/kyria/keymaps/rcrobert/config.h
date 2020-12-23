@@ -18,6 +18,10 @@
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
+
+// Control which offhand image is displayed. If none are selected, the kyria logo will be used. Do not define more than one, it won't compile.
+  #define OLED_OFFHAND_IMG_SAMURAI_LOGO 1
+  #define OLED_OFFHAND_IMG_SAMURAI_TEXT 0
 #endif
 
 #ifdef RGBLIGHT_ENABLE
