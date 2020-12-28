@@ -18,6 +18,7 @@
 
 #ifdef OLED_DRIVER_ENABLE
   #define OLED_DISPLAY_128X64
+  #define OLED_TIMEOUT 60000
 
 // Control which offhand image is displayed. If none are selected, the kyria logo will be used. Do not define more than one, it won't compile.
   #define OLED_OFFHAND_IMG_SAMURAI_LOGO 1
@@ -31,6 +32,10 @@
   #define RGBLIGHT_VAL_STEP 8
   #define RGBLIGHT_LIMIT_VAL 150
 #endif
+
+// EEPROM controls handedness
+// See: https://beta.docs.qmk.fm/using-qmk/hardware-features/feature_split_keyboard#setting-handedness
+#define EE_HANDS
 
 // If you are using an Elite C rev3 on the slave side, uncomment the lines below:
 #define SPLIT_USB_DETECT
