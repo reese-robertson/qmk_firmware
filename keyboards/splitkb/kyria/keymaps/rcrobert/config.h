@@ -33,6 +33,10 @@
   #define RGBLIGHT_LIMIT_VAL 150
 #endif
 
+// See: https://docs.qmk.fm/#/tap_hold
+#undef PERMISSIVE_HOLD
+#define IGNORE_MOD_TAP_INTERRUPT
+
 // EEPROM controls handedness
 // See: https://beta.docs.qmk.fm/using-qmk/hardware-features/feature_split_keyboard#setting-handedness
 #define EE_HANDS

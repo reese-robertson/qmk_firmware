@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 // Keep track of current firmware version.
-#define RCROBERT_VERSION "v1.1"
+#define RCROBERT_VERSION "v1.2"
 
 enum layers {
     LAYER_QWERTY = 0,
@@ -23,7 +23,7 @@ enum custom_keys {
  */
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 	[LAYER_QWERTY] = LAYOUT(
-        KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_PIPE,
+        KC_NO, KC_Q, KC_W, KC_E, KC_R, KC_T, KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLASH,
         KC_ESC, LGUI_T(KC_A), LALT_T(KC_S), LCTL_T(KC_D), LSFT_T(KC_F), KC_G, KC_H, LSFT_T(KC_J), LCTL_T(KC_K), LALT_T(KC_L), LGUI_T(KC_SCLN), KC_QUOT,
         KC_NO, KC_Z, RALT_T(KC_X), KC_C, KC_V, KC_B, KC_NO, KC_NO, KC_NO, KC_NO, KC_N, KC_M, KC_COMM, RALT_T(KC_DOT), KC_SLSH, KC_NO,
         KC_NO, KC_NO, KC_NO, LT(1,KC_SPC), LT(2,KC_BSPC), KC_TAB, LT(3,KC_ENT), KC_NO, KC_NO, KC_NO),
@@ -255,6 +255,9 @@ static void render_status(void) {
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
+    // NOTE: `layer_state` only exists for the master keyboard, this will
+    // not update the OLED with proper layers when rendering on the aux
+    // side.
     switch (get_highest_layer(layer_state)) {
         case LAYER_QWERTY:
             oled_write_P(PSTR("Default"), false);
@@ -271,6 +274,7 @@ static void render_status(void) {
         default:
             oled_write_P(PSTR("ERR!"), false);
     }
+    oled_write_P(PSTR("\n"), false);
 
     // Host Keyboard LED Status
     /*
@@ -287,7 +291,7 @@ static void render_status(void) {
  * Renders the current status on the main half, Kyria logo on the alternate.
  */
 void oled_task_user(void) {
-    if (is_keyboard_left()) {
+    if (is_keyboard_master()) {
         render_status();
     } else {
         render_offhand();
