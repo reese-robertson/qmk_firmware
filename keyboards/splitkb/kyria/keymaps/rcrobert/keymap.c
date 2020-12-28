@@ -1,5 +1,8 @@
 #include QMK_KEYBOARD_H
 
+// Keep track of current firmware version.
+#define RCROBERT_VERSION "v1.1"
+
 enum layers {
     LAYER_QWERTY = 0,
     LAYER_R_NUM,
@@ -243,32 +246,39 @@ static void render_qmk_logo(void) {
 static void render_status(void) {
     // QMK Logo and version information
     render_qmk_logo();
-    oled_write_P(PSTR("Kyria rev1.0\n\n"), false);
+    oled_write_P(PSTR("Kyria rev1.0\n"), false);
+
+    // Firmware version
+    oled_write_P(PSTR("Firmware: "), false);
+    oled_write_P(PSTR(RCROBERT_VERSION), false);
+    oled_write_P(PSTR("\n\n"), false);
 
     // Host Keyboard Layer Status
     oled_write_P(PSTR("Layer: "), false);
     switch (get_highest_layer(layer_state)) {
         case LAYER_QWERTY:
-            oled_write_P(PSTR("Default\n"), false);
+            oled_write_P(PSTR("Default"), false);
             break;
         case LAYER_R_NUM:
-            oled_write_P(PSTR("Num\n"), false);
+            oled_write_P(PSTR("Num"), false);
             break;
         case LAYER_R_NAV:
-            oled_write_P(PSTR("Nav\n"), false);
+            oled_write_P(PSTR("Nav"), false);
             break;
         case LAYER_L_SYM:
-            oled_write_P(PSTR("Sym\n"), false);
+            oled_write_P(PSTR("Sym"), false);
             break;
         default:
-            oled_write_P(PSTR("ERR!\n"), false);
+            oled_write_P(PSTR("ERR!"), false);
     }
 
     // Host Keyboard LED Status
+    /*
     uint8_t led_usb_state = host_keyboard_leds();
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_NUM_LOCK) ? PSTR("NUMLCK ") : PSTR("       "), false);
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_CAPS_LOCK) ? PSTR("CAPLCK ") : PSTR("       "), false);
     oled_write_P(IS_LED_ON(led_usb_state, USB_LED_SCROLL_LOCK) ? PSTR("SCRLCK ") : PSTR("       "), false);
+    */
 }
 
 /**
