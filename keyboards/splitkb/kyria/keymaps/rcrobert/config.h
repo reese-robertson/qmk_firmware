@@ -31,6 +31,8 @@
   #define RGBLIGHT_SAT_STEP 8
   #define RGBLIGHT_VAL_STEP 8
   #define RGBLIGHT_LIMIT_VAL 150
+#else
+  #undef RGBLIGHT_ANIMATIONS
 #endif
 
 // See: https://docs.qmk.fm/#/tap_hold
