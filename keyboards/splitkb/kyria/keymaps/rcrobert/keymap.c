@@ -1,7 +1,7 @@
 #include QMK_KEYBOARD_H
 
 // Keep track of current firmware version.
-#define RCROBERT_VERSION "v1.4"
+#define RCROBERT_VERSION "v1.5"
 
 enum layers {
     LAYER_QWERTY = 0,
